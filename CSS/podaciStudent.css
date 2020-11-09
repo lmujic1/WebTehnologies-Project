@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.okvir {
+    padding-top: 10%;
+}
+
+table {
+    padding-top: 10%;
+}
+
+table,
+tr,
+td {
+    border-collapse: collapse;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+    width: 350px;
+}
+
+tr:hover {
+    border: 2px solid black;
+}
+
+tr:first-child {
+    font-weight: bold;
+    background-color: burlywood;
+}
+
+tr:first-child:hover {
+    border: 1px solid black;
+}

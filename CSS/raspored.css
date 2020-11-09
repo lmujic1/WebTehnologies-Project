@@ -1,0 +1,79 @@
+body {
+    margin: 0 auto;
+}
+
+table {
+    padding-top: 50%;
+}
+
+.okvir {
+    padding-top: 10%;
+    background-color: white;
+}
+
+table,
+tr,
+th {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    font-weight: normal;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: lightgray;
+    padding: 10px;
+}
+
+th {
+    height: 30px;
+}
+
+tr {
+    border: 1px solid black;
+}
+
+table th:nth-child(odd) {
+    border-left: 1px dashed black;
+    border-right: 1px solid black;
+}
+
+table tr:first-child th {
+    height: 3px;
+    border: hidden;
+    background-color: white;
+    border-bottom: 1px solid black;
+}
+
+table th:first-child {
+    text-align: right;
+    font-size: small;
+    background-color: white;
+    border: hidden;
+    border-right: 1px solid black;
+    border-bottom: 1px solid white;
+}
+
+table th.vrijeme {
+    padding-bottom: 0;
+    font-size: 10px;
+    text-align: right;
+}
+
+div::first-line {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+div {
+    background-color: rgb(209, 221, 238);
+    font-size: 10px;
+}
+
+th.rasp {
+    padding-top: 0;
+    background-color: rgb(209, 221, 238);
+}
+
+.punar {
+    border-right: 1px solid black;
+}
