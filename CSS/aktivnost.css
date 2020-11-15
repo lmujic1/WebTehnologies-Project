@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(0deg, rgba(223, 233, 241, 1) 0%, rgba(139, 183, 205, 1) 100%);
+    background-image: linear-gradient(0deg, rgb(223, 233, 241) 0%, rgb(139, 183, 205) 100%);
     height: 755px;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -10,6 +10,8 @@ body {
     margin: 0 auto;
     padding: 0;
     display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
     vertical-align: middle;
     padding-top: 10%;
 }
@@ -60,4 +62,35 @@ p:last-child {
 
 p {
     font-size: medium;
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        height: 600px;
+        margin: 0 auto;
+    }
+    .okvir {
+        width: 600px;
+        padding-right: 50%;
+        align-items: flex-end;
+        display: grid;
+        grid-template-columns: 30% 50% 20%;
+        grid-template-rows: 50% 50%;
+        vertical-align: middle;
+        padding-top: 10%;
+    }
+    #prethodna {
+        display: none;
+    }
+    #trenutna {
+        float: none;
+        align-items: center;
+        grid-column: 2;
+        grid-row: 1;
+    }
+    #sledeca {
+        align-items: center;
+        grid-column: 2;
+        grid-row: 2;
+    }
 }
