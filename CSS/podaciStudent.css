@@ -28,7 +28,7 @@ tr:hover {
 
 tr:first-child {
     font-weight: bold;
-    background-color: burlywood;
+    background-color: rgb(90, 152, 152);
 }
 
 tr:first-child:hover {

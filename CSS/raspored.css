@@ -28,8 +28,13 @@ tr {
 }
 
 table th:nth-child(odd) {
+    border: 1px solid black;
     border-left: 1px dashed black;
-    border-right: 1px solid black;
+}
+
+table th:nth-child(even) {
+    border: 1px solid black;
+    border-right: 1px dashed black;
 }
 
 table tr:first-child th {
@@ -70,12 +75,42 @@ th.rasp {
     background-color: rgb(209, 221, 238);
 }
 
-.punar {
-    border-right: 1px solid black;
+.nePrikazuj {
+    display: none;
 }
 
-.special {
-    border: none;
-    border-right: 1px dashed black;
-    border-left: 1px solid black;
+@media screen and (max-width: 600px) {
+    table,
+    tr,
+    th,
+    td {
+        border-collapse: collapse;
+        background-color: white;
+    }
+    tr,
+    th,
+    td {
+        display: flex;
+        flex-direction: column;
+    }
+    th:empty {
+        display: none;
+    }
+    th.rasp,
+    div {
+        background-color: white;
+    }
+    table th:nth-child(odd) {
+        border: hidden;
+    }
+    table th:nth-child(even) {
+        border: hidden;
+    }
+    tr:first-child {
+        display: none;
+    }
+    .daniUSedmici {
+        color: #4c54af;
+        font-weight: bold;
+    }
 }
