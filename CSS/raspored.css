@@ -19,6 +19,10 @@ th {
     padding: 10px;
 }
 
+.podebljano {
+    font-weight: bold;
+}
+
 th {
     height: 40px;
 }
