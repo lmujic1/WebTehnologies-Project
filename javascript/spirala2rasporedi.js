@@ -18,5 +18,5 @@
    dodajAktivnost(okvir2, "AFJ", "predavanje", 16.5, 19, "Utorak");
    dodajAktivnost(okvir2, "IM2", "predavanje", 12, 15, "Srijeda");
    dodajAktivnost(okvir2, "OI", "predavanje", 10, 15, "Četvrtak");
-   dodajAktivnost(okvir2, "LAG", "predavanje", 18, 23, "Petak");
+   dodajAktivnost(okvir2, "LAG", "predavanje", 18, 22, "Petak");
    dodajAktivnost(okvir2, "LAG", "vježbe", 9, 11, "Petak");

@@ -23,18 +23,19 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
             for (let j = 1; j <= numCol; j++) {
                 var th = document.createElement("th");
                 if (i == 1) {
-                    th.className = "vrijeme"
-                    1;
-                    if (pomocniSat < 14 && (j % 2 == 1 && pomocniSat % 2 == 0)) {
+                    th.className = "vrijeme";
+                    if ((pomocniSat < 14 && (j % 2 == 1 && pomocniSat % 2 == 0)) || (j == 1)) {
                         th.colSpan = "2";
                         var hour = dajSateString(pomocniSat);
                         th.textContent = hour;
                         j++;
                     } else if (pomocniSat > 14 && (j % 2 == 1 && pomocniSat % 2 == 1) && j < numCol) {
-                        th.colSpan = "2";
-                        var hour = dajSateString(pomocniSat);
-                        th.textContent = hour;
-                        j++;
+                        if (pomocniSat != satKraj - 1) {
+                            th.colSpan = "2";
+                            var hour = dajSateString(pomocniSat);
+                            th.textContent = hour;
+                            j++;
+                        }
                     }
                 } else {
                     if (j == 1) {
@@ -48,7 +49,6 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
             }
             table.appendChild(tr);
         }
-
         div.appendChild(table);
     }
 }
@@ -59,7 +59,6 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
     } else {
         var table = raspored.getElementsByTagName('table')[0];
         var numRow = table.rows.length;
-
         //pronađi koji je dan
         var radniRed;
         for (var i = 1; i < numRow; i++) {
@@ -69,7 +68,7 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
                 break;
             }
         }
-        if (radniRed == null || vrijemePocetak < pocetak ||
+        if (!radniRed || vrijemePocetak < pocetak ||
             vrijemePocetak > kraj || vrijemeKraj <= vrijemePocetak ||
             vrijemeKraj > kraj || vrijemeKraj < pocetak) {
             alert("Greška - u rasporedu ne postoji dan ili vrijeme u kojem pokušavate dodati termin");
@@ -96,6 +95,7 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
                     radniRed.cells[j].className = "rasp";
                     radniRed.cells[j].colSpan = numColspan;
                     radniRed.cells[j].appendChild(div);
+
                     if (imaAktivnostPoslije(radniRed, j + 1)) {
                         ispraviNakonDodavanjaAktivnosti(raspored, i, j);
                         izbrisiKolone(radniRed, numColspan);
@@ -141,9 +141,11 @@ function ispraviNakonDodavanjaAktivnosti(raspored, brojReda, brojKolone) {
         if (i % 2 == 0) {
             if (redovi.cells[i].colSpan != 1) {
                 if (redovi.cells[i].colSpan % 2 == 0) {
+                    // redovi.cells[i].classList.add("black1");
                     redovi.cells[i].style.borderRight = "1px dashed black";
                     redovi.cells[i].style.borderLeft = "1px dashed black";
                 } else {
+                    //redovi.cells[i].classList.add("black2"); *
                     redovi.cells[i].style.border = "1px dashed black";
                 }
             } else {

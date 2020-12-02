@@ -24,9 +24,8 @@ let IscrtajModul = (function() {
                 for (let j = 1; j <= numCol; j++) {
                     var th = document.createElement("th");
                     if (i == 1) {
-                        th.className = "vrijeme"
-                        1;
-                        if (pomocniSat < 14 && (j % 2 == 1 && pomocniSat % 2 == 0)) {
+                        th.className = "vrijeme";
+                        if ((pomocniSat < 14 && (j % 2 == 1 && pomocniSat % 2 == 0)) || (j == 1)) {
                             th.colSpan = "2";
                             var hour = dajSateString(pomocniSat);
                             th.textContent = hour;
@@ -77,7 +76,6 @@ let IscrtajModul = (function() {
             }
 
             var start = (vrijemePocetak - pocetak) * 2 + 1;
-            var end = (vrijemeKraj - pocetak) * 2 + 1;
             var numColspan = (vrijemeKraj - vrijemePocetak) * 2;
 
             //dodaj aktivnost
@@ -85,7 +83,6 @@ let IscrtajModul = (function() {
             div.innerHTML = naziv + "<br>" + tip;
 
             for (var j = 1; j < brojKolona; j++) {
-                console.log(j + "j + " + start + "start");
                 if (radniRed.cells[j].colSpan != 1) {
                     if ((j == start || (j + radniRed.cells[j].colSpan > start)) && radniRed.cells[j].innerHTML != "") {
                         alert("Greška - već postoji termin u rasporedu u zadanom vremenu");
