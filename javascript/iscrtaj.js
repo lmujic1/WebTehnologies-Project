@@ -24,11 +24,13 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
                 var th = document.createElement("th");
                 if (i == 1) {
                     th.className = "vrijeme";
-                    if ((pomocniSat < 14 && (j % 2 == 1 && pomocniSat % 2 == 0)) || (j == 1)) {
-                        th.colSpan = "2";
-                        var hour = dajSateString(pomocniSat);
-                        th.textContent = hour;
-                        j++;
+                    if (((pomocniSat < 14 && (j % 2 == 1 && pomocniSat % 2 == 0)) || (j == 1)) && j < numCol) {
+                        if (pomocniSat != satKraj - 1) {
+                            th.colSpan = "2";
+                            var hour = dajSateString(pomocniSat);
+                            th.textContent = hour;
+                            j++;
+                        }
                     } else if (pomocniSat > 14 && (j % 2 == 1 && pomocniSat % 2 == 1) && j < numCol) {
                         if (pomocniSat != satKraj - 1) {
                             th.colSpan = "2";
@@ -56,6 +58,7 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
 function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) {
     if (!raspored || raspored.getElementsByTagName("table").length == 0) {
         alert("Greška - raspored nije kreiran");
+        return;
     } else {
         var table = raspored.getElementsByTagName('table')[0];
         var numRow = table.rows.length;
@@ -72,6 +75,7 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
             vrijemePocetak > kraj || vrijemeKraj <= vrijemePocetak ||
             vrijemeKraj > kraj || vrijemeKraj < pocetak) {
             alert("Greška - u rasporedu ne postoji dan ili vrijeme u kojem pokušavate dodati termin");
+            return;
         }
 
         var start = (vrijemePocetak - pocetak) * 2 + 1;
@@ -86,11 +90,13 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
             if (radniRed.cells[j].colSpan != 1) {
                 if ((j == start || (j + radniRed.cells[j].colSpan > start)) && radniRed.cells[j].innerHTML != "") {
                     alert("Greška - već postoji termin u rasporedu u zadanom vremenu");
+                    return;
                 } else start -= radniRed.cells[j].colSpan - 1;
             }
             if (j == start) {
                 if (radniRed.cells[j].innerHTML != "") {
-                    alert("Greška - već postoji termin u rasporedu u zadanom vremenu")
+                    alert("Greška - već postoji termin u rasporedu u zadanom vremenu");
+                    return;
                 } else {
                     radniRed.cells[j].className = "rasp";
                     radniRed.cells[j].colSpan = numColspan;
@@ -100,7 +106,7 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
                         ispraviNakonDodavanjaAktivnosti(raspored, i, j);
                         izbrisiKolone(radniRed, numColspan);
                     } else {
-                        izbrisiKolone(radniRed, numColspan);
+                        izbrisiKolonePoslije(radniRed, numColspan);
                         ispraviNakonDodavanjaAktivnosti(raspored, i, j);
                     }
                     break;
@@ -121,6 +127,24 @@ function imaAktivnostPoslije(red, poz) {
 
 function izbrisiKolone(red, numColspan) {
     var vel = red.cells.length;
+    var zapamti = vel;
+    for (var j = vel - 1; j >= 0; j--) {
+        if (red.cells[j].innerHTML != "") {
+            zapamti = j;
+            break;
+        }
+    }
+    for (var i = zapamti; i > zapamti - numColspan + 1; i--) {
+        if (red.cells[i].innerHTML != "") {
+            numColspan++;
+
+        } else
+            red.deleteCell(i);
+    }
+}
+
+function izbrisiKolonePoslije(red, numColspan) {
+    var vel = red.cells.length;
     for (var i = vel - 1; i > vel - numColspan; i--) {
         if (red.cells[i].innerHTML != "") {
             numColspan++;
@@ -129,6 +153,7 @@ function izbrisiKolone(red, numColspan) {
             red.deleteCell(i);
     }
 }
+
 
 
 function ispraviNakonDodavanjaAktivnosti(raspored, brojReda, brojKolone) {
@@ -141,7 +166,6 @@ function ispraviNakonDodavanjaAktivnosti(raspored, brojReda, brojKolone) {
         if (i % 2 == 0) {
             if (redovi.cells[i].colSpan != 1) {
                 if (redovi.cells[i].colSpan % 2 == 0) {
-                    // redovi.cells[i].classList.add("black1");
                     redovi.cells[i].style.borderRight = "1px dashed black";
                     redovi.cells[i].style.borderLeft = "1px dashed black";
                 } else {

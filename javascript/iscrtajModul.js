@@ -25,16 +25,20 @@ let IscrtajModul = (function() {
                     var th = document.createElement("th");
                     if (i == 1) {
                         th.className = "vrijeme";
-                        if ((pomocniSat < 14 && (j % 2 == 1 && pomocniSat % 2 == 0)) || (j == 1)) {
-                            th.colSpan = "2";
-                            var hour = dajSateString(pomocniSat);
-                            th.textContent = hour;
-                            j++;
+                        if (((pomocniSat < 14 && (j % 2 == 1 && pomocniSat % 2 == 0)) || (j == 1)) && j < numCol) {
+                            if (pomocniSat != satKraj - 1) {
+                                th.colSpan = "2";
+                                var hour = dajSateString(pomocniSat);
+                                th.textContent = hour;
+                                j++;
+                            }
                         } else if (pomocniSat > 14 && (j % 2 == 1 && pomocniSat % 2 == 1) && j < numCol) {
-                            th.colSpan = "2";
-                            var hour = dajSateString(pomocniSat);
-                            th.textContent = hour;
-                            j++;
+                            if (pomocniSat != satKraj - 1) {
+                                th.colSpan = "2";
+                                var hour = dajSateString(pomocniSat);
+                                th.textContent = hour;
+                                j++;
+                            }
                         }
                     } else {
                         if (j == 1) {
@@ -48,6 +52,7 @@ let IscrtajModul = (function() {
                 table.appendChild(tr);
             }
             div.appendChild(table);
+            console.log(table);
         }
     }
 
@@ -101,7 +106,7 @@ let IscrtajModul = (function() {
                             ispraviNakonDodavanjaAktivnosti(raspored, i, j);
                             izbrisiKolone(radniRed, numColspan);
                         } else {
-                            izbrisiKolone(radniRed, numColspan);
+                            izbrisiKolonePoslije(radniRed, numColspan);
                             ispraviNakonDodavanjaAktivnosti(raspored, i, j);
                         }
                         break;
@@ -118,7 +123,25 @@ let IscrtajModul = (function() {
         return false;
     }
 
-    let izbrisiKolone = function(red, numColspan) {
+    function izbrisiKolone(red, numColspan) {
+        var vel = red.cells.length;
+        var zapamti = vel;
+        for (var j = vel - 1; j >= 0; j--) {
+            if (red.cells[j].innerHTML != "") {
+                zapamti = j;
+                break;
+            }
+        }
+        for (var i = zapamti; i > zapamti - numColspan + 1; i--) {
+            if (red.cells[i].innerHTML != "") {
+                numColspan++;
+
+            } else
+                red.deleteCell(i);
+        }
+    }
+
+    function izbrisiKolonePoslije(red, numColspan) {
         var vel = red.cells.length;
         for (var i = vel - 1; i > vel - numColspan; i--) {
             if (red.cells[i].innerHTML != "") {
