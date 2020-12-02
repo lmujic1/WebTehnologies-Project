@@ -11,7 +11,7 @@
 
 
    let okvir2 = document.getElementById("okvir2");
-   iscrtajRaspored(okvir2, ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"], 7, 23);
+   iscrtajRaspored(okvir2, ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"], 7, 22);
    dodajAktivnost(okvir2, "OOI", "predavanje", 7, 10, "Ponedjeljak");
    dodajAktivnost(okvir2, "PWS", "predavanje", 14.5, 17, "Ponedjeljak");
    dodajAktivnost(okvir2, "AFJ", "tutorijal", 14.5, 16.5, "Utorak");
