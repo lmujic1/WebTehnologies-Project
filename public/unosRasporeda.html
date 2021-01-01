@@ -4,46 +4,41 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="../CSS/planiranjeNastavnik.css">
-    <link rel="stylesheet" href="../CSS/meni.css">
-    <title>Plan nastavnik</title>
+    <link rel="stylesheet" href="./CSS/unosRasporeda.css">
+    <title>Unos rasporeda</title>
 </head>
 
 <body>
-    <div class="topnav">
-        <a href="../html/spirala2rasporedi.html">Raspored</a>
-        <a href="../html/aktivnost.html">Aktivnost</a>
-        <a class="active" href="../html/planiranjeNastavnik.html">Plan nastavnik</a>
-        <a href="../html/podaciStudent.html">Podaci o studentu</a>
-    </div>
-    <div class="okvir">
-        <h1>Plan nastavnika</h1>
-        <div class="okvirForme">
+
+    <div class="naslov">
+        <h1>Nova aktivnost</h1>
+
+        <div class="formaZaUnos">
             <form>
-                <div>
+                <div class="unos">
                     <label>Naziv predmeta:</label>
                     <input type="text"> <br>
                 </div>
-                <div>
+                <div class="unos">
                     <label>Vrsta nastave:</label>
                     <select>
                         <option value="predavanje">Predavanje</option>
                         <option value="vjezbe">Vježbe</option>
+                        <option value="tutorijal">Tutorijal</option>
                     </select>
                     <br>
                 </div>
-                <div>
+                <div class="unos">
                     <label>Vrijeme početka:</label>
-                    <input type="time">
-                    <br>
+                    <input type="time" min="08:00" max="20:00">
                 </div>
 
-                <div>
+                <div class="unos">
                     <label>Vrijeme kraja:</label>
-                    <input type="time">
+                    <input type="time" min="08:00" max="20:00">
                 </div>
 
-                <div>
+                <div class="unos">
                     <label>Dan u sedmici:</label>
                     <select>
                     <option value="ponedjeljak">Ponedjeljak</option>
@@ -54,6 +49,10 @@
                 </select>
                 </div>
 
+                <div class="buttons">
+                    <button type="submit">Dodaj aktivnost</button>
+                    <button type="reset">Odustani</button>
+                </div>
 
             </form>
         </div>

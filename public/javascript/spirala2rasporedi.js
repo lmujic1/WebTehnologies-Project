@@ -10,7 +10,7 @@ dodajAktivnost(okvir, "OI", "predavanje", 12, 15, "Srijeda");
 
 
 
-let okvir2 = document.getElementById("okvir2");
+/*let okvir2 = document.getElementById("okvir2");
 iscrtajRaspored(okvir2, ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"], 6, 23);
 dodajAktivnost(okvir2, "OOI", "predavanje", 6, 10, "Ponedjeljak");
 dodajAktivnost(okvir2, "OOI", "predavanje", 8, 10, "Ponedjeljak");
@@ -23,4 +23,4 @@ dodajAktivnost(okvir2, "IM2", "vježbe", 15, 18, "Srijeda");
 dodajAktivnost(okvir2, "OI", "predavanje", 19, 23, "Četvrtak");
 dodajAktivnost(okvir2, "OI", "vježbe", 15, 18, "Četvrtak");
 dodajAktivnost(okvir2, "LAG", "predavanje", 18, 22, "Petak");
-dodajAktivnost(okvir2, "LAG", "vježbe", 9, 12, "Petak");
+dodajAktivnost(okvir2, "LAG", "vježbe", 9, 12, "Petak");*/

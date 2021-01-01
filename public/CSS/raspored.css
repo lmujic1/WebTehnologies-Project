@@ -2,11 +2,20 @@ body {
     margin: 0 auto;
 }
 
-.okvir {
+#okvir {
+    background-color: white;
+}
+
+#okvir2 {
+    background-color: white;
+}
+
+
+/*.okvir {
     padding-top: 5%;
     background-color: white;
     font-family: Arial, Helvetica, sans-serif;
-}
+}*/
 
 table,
 tr,

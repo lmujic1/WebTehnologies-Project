@@ -52,7 +52,7 @@ let IscrtajModul = (function() {
                 table.appendChild(tr);
             }
             div.appendChild(table);
-            console.log(table);
+            //console.log(table);
         }
     }
 
