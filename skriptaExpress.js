@@ -2,26 +2,31 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.get('/predmeti', function(req, res) {
     const fs = require('fs');
     var predmeti = [];
+
     fs.readFile('predmeti.txt', 'utf8', function(err, data) {
         if (err) throw err;
         else {
-
             const redoviPodataka = data.split(/\r?\n/);
-            for (let i = 0; i < redoviPodataka.length; i++) {
-                var podatak = redoviPodataka[i].split(",");
-                let predmet = {
-                    naziv: podatak[0]
-                };
-                predmeti.push(predmet);
+            if (redoviPodataka[0].length == 0) res.json(predmeti);
+            else {
+                for (let i = 0; i < redoviPodataka.length; i++) {
+                    if (redoviPodataka[i].length != 0) {
+                        var podatak = redoviPodataka[i].split(",");
+                        let predmet = {
+                            naziv: podatak[0]
+                        };
+                        predmeti.push(predmet);
+                    }
+                }
+                res.json(predmeti);
             }
-            res.json(predmeti);
         }
     });
 
@@ -34,18 +39,23 @@ app.get('/aktivnosti', function(req, res) {
         if (err) throw err;
         else {
             const redoviPodataka = data.split(/\r?\n/);
-            for (let i = 0; i < redoviPodataka.length; i++) {
-                var podatak = redoviPodataka[i].split(",");
-                let aktivnost = {
-                    naziv: podatak[0],
-                    tip: podatak[1],
-                    pocetak: podatak[2],
-                    kraj: podatak[3],
-                    dan: podatak[4]
-                };
-                aktivnosti.push(aktivnost);
+            if (redoviPodataka[0].length == 0) res.json(aktivnosti);
+            else {
+                for (let i = 0; i < redoviPodataka.length; i++) {
+                    if (redoviPodataka[i].length != 0) {
+                        var podatak = redoviPodataka[i].split(",");
+                        let aktivnost = {
+                            naziv: podatak[0],
+                            tip: podatak[1],
+                            pocetak: Number(podatak[2]),
+                            kraj: Number(podatak[3]),
+                            dan: podatak[4]
+                        };
+                        aktivnosti.push(aktivnost);
+                    }
+                }
+                res.json(aktivnosti);
             }
-            res.json(aktivnosti);
         }
     });
 });
@@ -64,8 +74,8 @@ app.get('/predmet/:naziv/aktivnost', function(req, res) {
                     let aktivnost = {
                         naziv: podatak[0],
                         tip: podatak[1],
-                        pocetak: podatak[2],
-                        kraj: podatak[3],
+                        pocetak: Number(podatak[2]),
+                        kraj: Number(podatak[3]),
                         dan: podatak[4]
                     };
                     aktivnosti.push(aktivnost);
@@ -80,11 +90,12 @@ app.get('/predmet/:naziv/aktivnost', function(req, res) {
 app.post('/predmet', function(req, res) {
     let tijelo = req.body;
     var naziv = tijelo["naziv"];
-    let novaLinija = "\n" + tijelo["naziv"];
+    let novaLinija = tijelo["naziv"] + "\n";
     const fs = require('fs');
     fs.readFile('predmeti.txt', 'utf8', function(err, data) {
         if (err) throw err;
         else {
+
             const redoviPodataka = data.split(/\r?\n/);
             for (let i = 0; i < redoviPodataka.length; i++) {
                 var podatak = redoviPodataka[i].split(",");
@@ -96,13 +107,13 @@ app.post('/predmet', function(req, res) {
     });
     fs.appendFile('./predmeti.txt', novaLinija, function(err) {
         if (err) throw err;
-        res.json({ message: "Uspješno dodan predmet!" })
+        res.json({ message: "Uspješno dodan predmet!" });
     });
 });
 
 app.post('/aktivnost', function(req, res) {
     let tijelo = req.body;
-    let novaLinija = "\n" + tijelo["naziv"] + "," + tijelo["tip"] + "," + tijelo["pocetak"] + "," + tijelo["kraj"] + "," + tijelo["dan"];
+    let novaLinija = tijelo["naziv"] + "," + tijelo["tip"] + "," + tijelo["pocetak"] + "," + tijelo["kraj"] + "," + tijelo["dan"] + "\n";
     let pocetak = tijelo["pocetak"];
     let kraj = tijelo["kraj"];
     let dan = tijelo["dan"];
@@ -198,11 +209,11 @@ app.delete('/predmet/:naziv', function(req, res) {
 app.delete('/all', function(req, res) {
     const fs = require('fs');
     fs.writeFile('predmeti.txt', '', function(err) {
-        if (err) res.json({ message: "Greška - sadržaj datoteka nije moguće obrisati!" });
+        if (err) res.json({ message: 'Greška - sadržaj datoteka nije moguće obrisati!' });
         else {
             const fs1 = require('fs');
             fs1.writeFile('aktivnosti.txt', '', function(err) {
-                if (err) res.json({ message: "Greška - sadržaj datoteka nije moguće obrisati!" });
+                if (err) res.json({ message: 'Greška - sadržaj datoteka nije moguće obrisati!' });
                 else {
                     res.json({ message: "Uspješno obrisan sadržaj datoteka!" });
                 }
@@ -211,3 +222,5 @@ app.delete('/all', function(req, res) {
     });
 });
 app.listen(3000);
+
+module.exports = app;
