@@ -1,7 +1,7 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let should = chai.should();
-let server = require('../skriptaExpress');
+let server = require('../skripta');
 let fs = require('fs');
 const vratiPodatke = require('./pomocneFunkcije');
 

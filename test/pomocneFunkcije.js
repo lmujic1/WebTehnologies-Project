@@ -42,7 +42,7 @@ function vratiPodatke(content) {
             ulaz: u,
             izlaz: iz
         };
-        console.log(test);
+        //console.log(test);
         testovi.push(test);
     }
     return testovi;

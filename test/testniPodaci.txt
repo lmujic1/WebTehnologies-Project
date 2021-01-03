@@ -7,3 +7,19 @@ POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":12,\"kraj"\:15,
 POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":12,\"kraj"\:15,\"dan\":\"Ponedjeljak\"},{\"message\":\"Aktivnost nije validna!\"}
 GET,/aktivnosti,null,[{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":12,\"kraj"\:15,\"dan\":\"Ponedjeljak\"}]
 GET,/predmeti,null,[{\"naziv\":\"RMA\"},{\"naziv\":\"WT\"}]
+GET,/predmet/WT/aktivnost,null,[{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":12,\"kraj"\:15,\"dan\":\"Ponedjeljak\"}]
+DELETE,/all,null,{\"message\":\"Uspješno obrisan sadržaj datoteka!\"}
+GET,/predmet/WT/aktivnost,null,[]
+POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":12,\"kraj"\:15,\"dan\":\"Ponedjeljak\"},{\"message\":\"Uspješno dodana aktivnost!\"}
+DELETE,/aktivnost/WT,null,{\"message\":\"Uspješno obrisana aktivnost!\"}
+POST,/predmet,{\"naziv\":\"RMA\"},{\"message\":\"Uspješno dodan predmet!\"}
+DELETE,/predmet/RMA,null,{\"message\":\"Uspješno obrisan predmet!\"}
+DELETE,/predmet/RMA,null,{\"message\":\"Greška - predmet nije obrisan!\"}
+DELETE,/aktivnost/WT,null,{\"message\":\"Greška - aktivnost nije obrisana!\"}
+POST,/predmet,{\"naziv\":\"RMA\"},{\"message\":\"Uspješno dodan predmet!\"}
+POST,/predmet,{\"naziv\":\"RMA\"},{\"message\":\"Naziv predmeta postoji!\"}
+DELETE,/all,null,{\"message\":\"Uspješno obrisan sadržaj datoteka!\"}
+POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":12.4,\"kraj"\:15,\"dan\":\"Ponedjeljak\"},{\"message\":\"Aktivnost nije validna!\"}
+POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":12,\"kraj"\:15.4,\"dan\":\"Ponedjeljak\"},{\"message\":\"Aktivnost nije validna!\"}
+POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":20,\"kraj"\:20,\"dan\":\"Ponedjeljak\"},{\"message\":\"Aktivnost nije validna!\"}
+POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":15,\"kraj"\:12,\"dan\":\"Ponedjeljak\"},{\"message\":\"Aktivnost nije validna!\"}
