@@ -1,0 +1,3 @@
+OOI,predavanje,8.5,10,ponedjeljak
+OOI,vjezbe,10,11,Četvrtak
+OOI,tutorijal,8.5,10,Srijeda

@@ -5,6 +5,7 @@ let server = require('../skripta');
 let fs = require('fs');
 const vratiPodatke = require('./pomocneFunkcije');
 
+
 chai.use(chaiHttp);
 
 var content = fs.readFileSync('./test/testniPodaci.txt', 'utf8', (err, data) => {});

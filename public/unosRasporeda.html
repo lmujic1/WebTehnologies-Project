@@ -14,14 +14,16 @@
         <h1>Nova aktivnost</h1>
 
         <div class="formaZaUnos">
-            <form>
+
+            <form id="unos">
                 <div class="unos">
                     <label>Naziv predmeta:</label>
-                    <input type="text"> <br>
+                    <input id="naziv" name="naziv" type="text" list="nazivLista" onclick="loadDoc()" />
+                    <datalist id="nazivLista"></datalist>
                 </div>
                 <div class="unos">
                     <label>Vrsta nastave:</label>
-                    <select>
+                    <select id="tip"> 
                         <option value="predavanje">Predavanje</option>
                         <option value="vjezbe">Vježbe</option>
                         <option value="tutorijal">Tutorijal</option>
@@ -30,33 +32,35 @@
                 </div>
                 <div class="unos">
                     <label>Vrijeme početka:</label>
-                    <input type="time" min="08:00" max="20:00">
+                    <input type="time" min="08:00" max="20:00" id="pocetak">
                 </div>
 
                 <div class="unos">
                     <label>Vrijeme kraja:</label>
-                    <input type="time" min="08:00" max="20:00">
+                    <input type="time" min="08:00" max="20:00" id="kraj">
                 </div>
 
                 <div class="unos">
                     <label>Dan u sedmici:</label>
-                    <select>
-                    <option value="ponedjeljak">Ponedjeljak</option>
-                    <option value="utorak">Utorak</option>
-                    <option value="srijeda">Srijeda</option>
-                    <option value="cetvrtak">Četvrtak</option>
-                    <option value="petak">Petak</option>
-                </select>
+                    <select id="dan">
+                        <option value="Ponedjeljak">Ponedjeljak</option>
+                        <option value="Utorak">Utorak</option>
+                        <option value="Srijeda">Srijeda</option>
+                        <option value="Četvrtak">Četvrtak</option>
+                        <option value="Petak">Petak</option>
+                    </select>
                 </div>
 
                 <div class="buttons">
-                    <button type="submit">Dodaj aktivnost</button>
+                    <button type="button" onclick="dodajPredmetIAktivnost()">Dodaj aktivnost</button>
                     <button type="reset">Odustani</button>
                 </div>
 
             </form>
         </div>
     </div>
+
+    <script src="../ajax.js"></script>
 </body>
 
 </html>

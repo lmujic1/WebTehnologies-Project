@@ -28,6 +28,8 @@ function vratiPodatke(content) {
                 } else iz += podatak[j];
             }
         }
+
+
         u = u.split('\\').join('');
         u = u.split('""').join('","');
 
@@ -36,6 +38,7 @@ function vratiPodatke(content) {
         iz = iz.split('}{').join('},{');
         iz = iz.split('\\').join('');
         iz = iz.split('""').join('","');
+
         const test = {
             operacija: o,
             ruta: r,
