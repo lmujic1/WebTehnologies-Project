@@ -107,7 +107,7 @@ app.post('/predmet', function(req, res) {
         }
     }
     //}
-    if (postoji == 1) res.json({ message: "Naziv predmeta postoji!" });
+    if (postoji == 1 && naziv == '') res.json({ message: "Naziv predmeta postoji!" });
     else {
         fs.appendFile('./predmeti.txt', novaLinija, function(err) {
             if (err) throw err;

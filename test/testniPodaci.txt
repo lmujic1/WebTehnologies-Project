@@ -23,3 +23,5 @@ POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":12.4,\"kraj"\:1
 POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":12,\"kraj"\:15.4,\"dan\":\"Ponedjeljak\"},{\"message\":\"Aktivnost nije validna!\"}
 POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":20,\"kraj"\:20,\"dan\":\"Ponedjeljak\"},{\"message\":\"Aktivnost nije validna!\"}
 POST,/aktivnost,{\"naziv\":\"WT\",\"tip\":\"vjezba\",\"pocetak\":15,\"kraj"\:12,\"dan\":\"Ponedjeljak\"},{\"message\":\"Aktivnost nije validna!\"}
+POST,/predmet,{\"naziv\":\"RMA\"},{\"message\":\"Uspješno dodan predmet!\"}
+POST,/predmet,{\"naziv\":\"WT\"},{\"message\":\"Uspješno dodan predmet!\"}

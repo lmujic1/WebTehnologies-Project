@@ -21,12 +21,25 @@ function loadDoc() {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 nazivLista = vratiNazive(this.responseText);
+                ucitajAktivnosti();
             }
         };
         xhttp.open("GET", "http://localhost:3000/predmeti", true);
         xhttp.send();
     } else document.getElementById("nazivLista").innerHTML = nazivi;
 }
+
+function ucitajAktivnosti() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("Ucitane aktivnosti iz aktivnosti.txt");
+        }
+    };
+    xhttp.open("GET", "http://localhost:3000/aktivnosti", true);
+    xhttp.send();
+}
+
 
 function vratiNazive(content) {
     const redoviPodataka = content.split(/\r?,/);

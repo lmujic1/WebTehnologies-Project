@@ -35,7 +35,6 @@ describe("Testovi", function() {
                         res.body.should.be.a('array');
                         res.should.be.json;
                         res.body.should.be.eql(JSON.parse(test.izlaz));
-
                         done();
                     });
             });
