@@ -1,0 +1,2 @@
+WT,predavanje,11,14,Ponedjeljak
+RMA,predavanje,9,11,Petak

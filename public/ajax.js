@@ -61,7 +61,7 @@ function dodajPredmetIAktivnost() {
     dodajAktivnost();
     if (uspjesnoDodanaAktivnost == 0 && uspjesnoDodanPredmet == 1) {
         izbrisiPredmet();
-    } else {
+    } else if (uspjesnoDodanaAktivnost == 1) {
         alert("AKTIVNOST JE USPJEŠNO DODANA!");
     }
 }
@@ -73,7 +73,6 @@ function izbrisiPredmet() {
             var tekst = xhttp.responseText;
             if (tekst.includes('Uspješno dodan predmet!')) {
                 uspjesnoDodanPredmet = 1;
-                //console.log(tekst);
             }
         }
     };
@@ -105,7 +104,9 @@ function dodajAktivnost() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var tekst = xhttp.responseText;
-            if (tekst.includes('Uspješno dodana aktivnost!')) {
+            if (tekst.includes("Uspješno dodana aktivnost!")) {
+                //console.log("TAČNO!");
+                //alert("AKTIVNOST JE USPJEŠNO DODANA!");
                 uspjesnoDodanaAktivnost = 1;
             }
 

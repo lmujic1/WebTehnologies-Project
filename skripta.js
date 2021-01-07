@@ -107,7 +107,7 @@ app.post('/predmet', function(req, res) {
         }
     }
     //}
-    if (postoji == 1 && naziv == '') res.json({ message: "Naziv predmeta postoji!" });
+    if (postoji == 1 || naziv == '') res.json({ message: "Naziv predmeta postoji!" });
     else {
         fs.appendFile('./predmeti.txt', novaLinija, function(err) {
             if (err) throw err;
@@ -117,9 +117,9 @@ app.post('/predmet', function(req, res) {
 });
 
 app.post('/aktivnost', function(req, res) {
+
     let tijelo = req.body;
     let novaLinija = tijelo["naziv"] + "," + tijelo["tip"] + "," + tijelo["pocetak"] + "," + tijelo["kraj"] + "," + tijelo["dan"] + "\n";
-
     let dan = tijelo["dan"];
     if (tijelo["naziv"] == "" || tijelo["tip"] == "" || tijelo["pocetak"] == "" || tijelo["kraj"] == "" || tijelo["dan"] == "") res.json({ message: "Aktivnost nije validna!" });
     else {
