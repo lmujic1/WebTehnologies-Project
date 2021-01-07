@@ -59,8 +59,11 @@ var uspjesnoDodanaAktivnost = 0,
 function dodajPredmetIAktivnost() {
     dodajPredmet();
     dodajAktivnost();
-    if (uspjesnoDodanaAktivnost == 0 && uspjesnoDodanPredmet == 1) {
-        izbrisiPredmet();
+    if (uspjesnoDodanaAktivnost == 0) {
+        if (uspjesnoDodanPredmet == 1) {
+            izbrisiPredmet();
+        }
+        alert("Nevalidna aktivnost")
     } else if (uspjesnoDodanaAktivnost == 1) {
         alert("AKTIVNOST JE USPJEŠNO DODANA!");
     }
@@ -105,8 +108,6 @@ function dodajAktivnost() {
         if (this.readyState == 4 && this.status == 200) {
             var tekst = xhttp.responseText;
             if (tekst.includes("Uspješno dodana aktivnost!")) {
-                //console.log("TAČNO!");
-                //alert("AKTIVNOST JE USPJEŠNO DODANA!");
                 uspjesnoDodanaAktivnost = 1;
             }
 
