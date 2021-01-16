@@ -79,7 +79,7 @@ function izbrisiPredmet() {
             }
         }
     };
-    var url = "http://localhost:3000/predmet" + "/" + naziv.valueM
+    var url = "http://localhost:3000/predmet" + "/" + naziv.value
     xhttp.open("DELETE", url, true);
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.send();

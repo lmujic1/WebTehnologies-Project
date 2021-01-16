@@ -1,26 +1,25 @@
 {
-  "name": "wt20p18257",
-  "version": "1.0.0",
-  "description": "",
-  "main": "skriptaExpress.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://lmujic1@bitbucket.org/lmujic1/wt20p18257.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/lmujic1/wt20p18257#readme",
-  "dependencies": {
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "express": "^4.17.1",
-    "mocha": "^8.2.1",
-    "start": "^5.1.0"
-  }
+    "name": "wt20p18257",
+    "version": "1.0.0",
+    "description": "",
+    "main": "skripta.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://lmujic1@bitbucket.org/lmujic1/wt20p18257.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "homepage": "https://bitbucket.org/lmujic1/wt20p18257#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "mysql": "^2.18.1",
+        "mysql2": "^1.7.0",
+        "sequelize": "^4.44.4"
+    }
 }
