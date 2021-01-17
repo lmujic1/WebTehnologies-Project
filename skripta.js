@@ -52,16 +52,28 @@ app.use(express.static('public'));
     });
     app.delete('/v2/predmet/:id', function(req, res) {
         var id = req.params["id"];
-        dbConn.query("DELETE FROM predmet WHERE id = ?", id, function(err, results, fields) {
-            if (err) console.log("Greška");
-            res.json({ message: 'Uspješno obrisan predmet' });
-        });
+        Provjera.azurirajAktivnostPredmet(id);
+        Provjera.azurirajStudentiGrupe(id);
+        dbConn.query("DELETE FROM grupa WHERE predmetId = ? ", id, function(err, result, field) {
+            if (!err) {
+                dbConn.query("DELETE FROM predmet WHERE id = ?", id, function(err, results, fields) {
+                    if (err) res.json({ message: 'Greška prilikom brisanja predmeta' })
+                    res.json({ message: 'Uspješno obrisan predmet' });
+                });
+            }
+        })
     });
     app.delete('/v2/predmet', function(req, res) {
-        dbConn.query("DELETE FROM predmet WHERE 1", id, function(err, results, fields) {
-            if (err) console.log("Greška");
-            res.json({ message: 'Uspješno obrisani predmeti' });
-        });
+        Provjera.azurirajAktivnostPredmet(-1);
+        Provjera.azurirajStudentiGrupe(-1);
+        dbConn.query("DELETE FROM grupa WHERE 1", function(err, result, field) {
+            if (!err) {
+                dbConn.query("DELETE FROM predmet WHERE 1", function(err, results, fields) {
+                    if (err) res.json({ message: 'Greška prilikom brisanja predmeta' })
+                    res.json({ message: 'Uspješno obrisani predmeti' });
+                });
+            }
+        })
     })
 }
 //MODEL DAN
@@ -105,8 +117,17 @@ app.use(express.static('public'));
     })
     app.delete('/v2/dan/:id', function(req, res) {
         var id = req.params["id"];
+        Provjera.azurirajAktivnostDan(id);
         dbConn.query("DELETE FROM dan WHERE id = ?", id, function(err, results, fields) {
-            if (err) console.log("Greška");
+            if (err) res.json({ message: 'Greška prilikom brisanja dana' });
+            res.json({ message: 'Uspješno obrisan dan' });
+        });
+    });
+
+    app.delete('/v2/dan', function(req, res) {
+        Provjera.azurirajAktivnostDan(-1);
+        dbConn.query("DELETE FROM dan WHERE id 1", function(err, results, fields) {
+            if (err) res.json({ message: 'Greška prilikom brisanja dana' });
             res.json({ message: 'Uspješno obrisan dan' });
         });
     });
@@ -152,8 +173,17 @@ app.use(express.static('public'));
     });
     app.delete('/v2/tip/:id', function(req, res) {
         var id = req.params["id"];
+        Provjera.azurirajAktivnostTip(id);
         dbConn.query("DELETE FROM tip WHERE id = ?", id, function(err, result, fields) {
-            if (err) console.log("Greška");
+            if (err) res.json({ message: 'Greška prilikom brisanja tipa' })
+            res.json({ message: 'Uspješno obrisan tip' });
+        });
+    });
+
+    app.delete('/v2/tip', function(req, res) {
+        Provjera.azurirajAktivnostTip(-1);
+        dbConn.query("DELETE FROM tip WHERE 1", function(err, result, fields) {
+            if (err) res.json({ message: 'Greška prilikom brisanja tipova' })
             res.json({ message: 'Uspješno obrisan tip' });
         });
     });
@@ -234,11 +264,29 @@ app.use(express.static('public'));
 
     app.delete('/v2/student/:id', function(req, res) {
         var id = req.params["id"];
-        dbConn.query("DELETE FROM student WHERE id = ?", id, function(err, result, fields) {
-            if (err) console.log("Greška");
-            res.json({ message: 'Uspješno obrisan student' });
-        });
+        dbConn.query("DELETE FROM studentigrupe WHERE studentId = ? ", id, function(err, result1, fields1) {
+            if (err) throw err;
+            else {
+                dbConn.query("DELETE FROM student WHERE id = ?", id, function(err, result, fields) {
+                    if (err) throw err;
+                    else res.json({ message: 'Uspješno obrisan student' });
+                });
+            }
+        })
+
     });
+
+    app.delete('/v2/student', function(req, res) {
+        dbConn.query("DELETE FROM studentigrupe WHERE 1 ", function(err, result1, fields1) {
+            if (err) throw err;
+            else {
+                dbConn.query("DELETE FROM student WHERE 1", function(err, result, fields) {
+                    if (err) throw err;
+                    else res.json({ message: 'Uspješno obrisani studenti' });
+                });
+            }
+        })
+    })
 }
 //MODEL GRUPA
 {
@@ -285,9 +333,9 @@ app.use(express.static('public'));
         var predmetIDqry = "(SELECT id FROM predmet WHERE naziv = '" + predmet + "')";
 
         db.grupa.findAll({ where: { naziv: naziv } }).then(function(result) {
-            if (result == null) {
-                dbConn.query("UPDATE dan SET naziv = ?, predmet = " + predmetIDqry + " WHERE id = ?", [naziv, id], function(err, results, fields) {
-                    if (err) res.json({ message: "Greška prilikom ažuriranja grupe" });
+            if (result.length == 0) {
+                dbConn.query("UPDATE grupa SET naziv = ?, predmetId = " + predmetIDqry + " WHERE id = ?", [naziv, id], function(err, results, fields) {
+                    if (err) res.json({ message: /*"Greška prilikom ažuriranja grupe" */ err });
                     else res.json({ message: 'Uspješno ažurirana grupa' });
                 })
 
@@ -298,9 +346,23 @@ app.use(express.static('public'));
     });
     app.delete('/v2/grupa/:id', function(req, res) {
         var id = req.params["id"];
-        dbConn.query("DELETE FROM grupa WHERE id = ?", id, function(err, results, fields) {
-            if (err) console.log("Greška");
-            res.json({ message: 'Uspješno obrisana grupa' });
+        Provjera.azurirajAktivnostGrupa(id);
+        dbConn.query("DELETE FROM studentigrupe WHERE grupaId = ? ", id, function(err, result1, fields1) {
+            dbConn.query("DELETE FROM grupa WHERE id = ?", id, function(err, results, fields) {
+                if (err) res.json({ message: 'Greška prilikom brisanja grupe' });
+                res.json({ message: 'Uspješno obrisana grupa' });
+            });
+        });
+    });
+
+    app.delete('/v2/grupa', function(req, res) {
+        Provjera.azurirajAktivnostGrupa(-1);
+        //azuriranje tabele studentiGrupe
+        dbConn.query("DELETE FROM studentigrupe WHERE 1", function(err, result1, fields1) {
+            dbConn.query("DELETE FROM grupa WHERE 1", function(err, results, fields) {
+                if (err) res.json({ message: 'Greška prilikom brisanja grupa' });
+                res.json({ message: 'Uspješno obrisane grupe' });
+            });
         });
     });
 }
@@ -397,19 +459,25 @@ app.use(express.static('public'));
         db.dan.findOne({ where: { naziv: dan } }).then(function(d) {
             db.aktivnost.findAll().then(function(results) {
                 var brojTermina = 0;
-                if (pocetak < 8 || kraj < 8 || pocetak > 20 || kraj > 20 || kraj < pocetak) brojTermina++;
-                results.forEach(element => {
+                //validiranje unosa vremena
+                if (pocetak < 8 || kraj < 8 || pocetak > 20 || kraj > 20 || kraj < pocetak ||
+                    (pocetak - Math.trunc(pocetak) != 0 && pocetak - Math.trunc(pocetak) != 0.5) ||
+                    (kraj - Math.trunc(kraj) != 0 && kraj - Math.trunc(kraj) != 0.5)) brojTermina++;
 
-                    if ((element.pocetak < pocetak && (element.kraj >= pocetak && element.kraj <= kraj)) ||
-                        (element.kraj > kraj && (element.pocetak >= pocetak && element.pocetak <= kraj)) ||
-                        ((element.pocetak >= pocetak && element.pocetak <= kraj) && (element.kraj >= pocetak && element.kraj <= kraj))) {
-                        if (d.id == element.danId) {
-                            brojTermina++;
-                            if (element.kraj == pocetak) brojTermina--;
-                            else if (element.pocetak == kraj) brojTermina--;
+                //provjera da li postoji preklapanje ukoliko je uneseno validno vrijeme
+                if (brojTermina == 0)
+                    results.forEach(element => {
+                        if ((element.pocetak < pocetak && (element.kraj >= pocetak && element.kraj <= kraj)) ||
+                            (element.kraj > kraj && (element.pocetak >= pocetak && element.pocetak <= kraj)) ||
+                            ((element.pocetak >= pocetak && element.pocetak <= kraj) && (element.kraj >= pocetak && element.kraj <= kraj))) {
+                            if (d.id == element.danId && element.id != id) {
+                                brojTermina++;
+                                if (element.kraj == pocetak) brojTermina--;
+                                else if (element.pocetak == kraj) brojTermina--;
+                            }
                         }
-                    }
-                });
+                    });
+                //unos ukoliko nea preklapanja i vrijeme je validno
                 if (brojTermina == 0) {
                     dbConn.query(qry, [naziv, pocetak, kraj, id], function(err, results, fields) {
                         if (err) res.json({ message: 'Greška prilikom ažuriranja aktivnosti' });
@@ -423,14 +491,14 @@ app.use(express.static('public'));
     app.delete('/v2/aktivnost/:id', function(req, res) {
         var id = req.params["id"];
         dbConn.query("DELETE FROM aktivnost WHERE id = ?", id, function(err, results, fields) {
-            if (err) console.log("Greška");
+            if (err) res.json({ message: 'Greška prilikom brisanja aktivnosti' });
             res.json({ message: 'Uspješno obrisana aktivnost' });
         });
     });
 
     app.delete('/v2/aktivnost', function(req, res) {
         dbConn.query("DELETE FROM aktivnost WHERE 1", function(err, results, fields) {
-            if (err) console.log("Greška");
+            if (err) res.json({ message: 'Greška prilikom brisanja aktivnosti' });
             res.json({ message: 'Uspješno obrisana aktivnost' });
         });
     });

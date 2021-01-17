@@ -10,7 +10,7 @@ window.onload = function() {
 }
 
 function ucitajGrupe() {
-    console.log(prviPutUcitano);
+    //console.log(prviPutUcitano);
     if (prviPutUcitano == 0) {
         prviPutUcitano = 1;
         var xhttp = new XMLHttpRequest();
@@ -73,6 +73,6 @@ function podaciOStudentu() {
         }
         studenti.push(s);
     }
-    console.log(studenti);
+    //console.log(studenti);
     return studenti;
 }
