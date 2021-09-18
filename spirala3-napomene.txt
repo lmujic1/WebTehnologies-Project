@@ -1,0 +1,10 @@
+3. zadatak:
+Testove sam pokretala kroz terminal(cmd) kucanjem mocha
+
+4.zadatak:
+
+- Obzirom da nije specificirano gdje treba učitati listu predmeta i aktivnosti, za predmete sam koristila datalist tag, gdje svaki pročitani predmet predstavlja jedan option, dok sam za aktivnosti stavila samo  console.log("Ucitane aktivnosti iz aktivnosti.txt");
+
+- S obzirom da su pozivi asinhroni, moguće je da slanjem jednog ili više neispravnih zahtjeva za dodavanje aktivnosti dođe do greške (pojavi se alert da je nevalidna aktinost) čak i kada se unose pravilna aktivnost i pokuša se dodati nakon slanja nevalidnih. 
+
+ 

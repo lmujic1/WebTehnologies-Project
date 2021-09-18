@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="bs">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Unos student</title>
+    <link rel="stylesheet" href="./CSS/student.css">
+
+</head>
+
+<body>
+    <h1>Unos studenta</h1>
+    <div class="forma">
+        <form>
+            <label for="student">Unesite studenta u CSV formatu - ime,indeks</label>
+            <br>
+            <textarea id="student" rows="3" cols="80"></textarea>
+            <br><br>
+            <label for="grupa">Grupa</label>
+            <br>
+            <select id="grupa" onclick="ucitajGrupe()">
+            </select>
+            <br><br><br>
+            <button type="button" onclick="unosStudenta()">Pošalji</button>
+        </form>
+    </div>
+    <script src="./unosStudenta.js"></script>
+</body>
+
+</html>

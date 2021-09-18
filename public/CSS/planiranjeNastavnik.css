@@ -1,0 +1,57 @@
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+    
+    div {
+        margin-bottom: 10px;
+    }
+    
+    .okvirForme {
+        margin: 0 auto;
+        height: 270px;
+        width: 600px;
+        background-color: rgb(90, 152, 152);
+    }
+    
+    .okvir {
+        padding-top: 5%;
+    }
+    
+    h1 {
+        padding: 0px;
+    }
+    
+    form {
+        padding: 50px;
+    }
+    
+    label {
+        display: inline-block;
+        text-align: left;
+        height: 20px;
+        width: 200px;
+    }
+    
+    input {
+        height: 20px;
+        width: 190px;
+    }
+    
+    select,
+    option {
+        height: 25px;
+        width: 197px;
+    }
+    
+    @media screen and (max-width: 600px) {
+        .okvirForme {
+            margin: 0 auto;
+            height: 500px;
+            width: 400px;
+        }
+        input,
+        select {
+            margin-bottom: 30px;
+        }
+    }

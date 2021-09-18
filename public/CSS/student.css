@@ -1,0 +1,19 @@
+.forma {
+    margin: 0 auto;
+    padding-top: 3px;
+    font-weight: 600
+}
+
+body {
+    margin: 0 auto;
+    padding-left: 3%;
+    padding-top: 3%;
+}
+
+select {
+    width: 385px;
+}
+
+textarea {
+    resize: none;
+}
